@@ -72,14 +72,6 @@ def get_message(sender_id, entity, value):
             try:
                 print("Getting day of request...")
                 results = TimeTableDatabase.GetLecturesOnDay(value[1].strftime('%A'))
-                #print(results)
-                #send_message(sender_id, len(results))
-                #send_message(sender_id, results[0])
-
-                while i < len(results):
-                    placeholder = results[i]
-                    send_message(sender_id, placeholder)
-                    i += 1
 
                 if len(results) > 0:
                     for i in range(0, len(results)):
