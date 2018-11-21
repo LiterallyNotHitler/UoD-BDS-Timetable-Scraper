@@ -1,4 +1,4 @@
-import random, witai, TimeTableDatabase
+import random, witai, TimeTableDatabase, time, timetablescraper, threading
 from flask import Flask, request
 from pymessenger.bot import Bot
 
@@ -49,48 +49,28 @@ def verify_fb_token(token_sent):
 #chooses a random message to send to the user
 def get_message(sender_id, entity, value):
     response = ""
+    DB_RESULT_TRUE = False
+
+    if len(entity) > 1: #Checks if there is a class/lecture intent and date time intent
+        pass
+    else:
+        send_message(sender_id, "Please retype the message more clearly.")
+        return None
+
     try:
-        if entity[0] == 'class_type': # and if class_type is in the classes already in DB
-            response = "Hold on. Let me check if you have {0}".format(str(value)) # Add a spell check
-            send_message(sender_id, response)
-            try:
-                print("Getting day of request...")
-                results = TimeTableDatabase.GetLecturesOnDay(value[1].strftime('%A'))
-
-                if len(results) > 0:
-                    for i in range(0, len(results)):
-                        send_message(sender_id, results[i])
-                else:
-                    send_message(sender_id, "No classes on that day")
-            except:
-                print("Class check error")
-                pass
-
-        elif entity[0] == 'lecture_check':
-            response = "Hold on. Let me check if you have lectures."
-            send_message(sender_id, response)
-            try:
-                print("Getting day of request...")
-                results = TimeTableDatabase.GetLecturesOnDay(value[1].strftime('%A'))
-
-                if len(results) > 0:
-                    for i in range(0, len(results)):
-                        send_message(sender_id, results[i])
-                else:
-                    send_message(sender_id, "No classes on that day")
-
-            except:
-                print("lecture check error")
-                TimeTableDatabase.ExceptionInfo()
-                pass
+        if entity[0] == 'class_type' or entity[0] == 'lecture_check':
+            # and if class_type is in the classes already in DB
+            ChooseMessage(sender_id, entity, value, "lectures")
 
         elif entity[0] == 'clinic_check':
-            response = "Hold on. Let me check if you have clinics."
+            #response = "Hold on. Let me check if you have clinics."
+            ChooseMessage(sender_id, entity, value, "clinics")
             send_message(sender_id, response)
 
-        elif entity[0] == 'lab_Check':
-            response = "Hold on. Let me check if you have labs."
-            send_message(sender_id, response)
+        elif entity[0] == 'lab_check':
+            #response = "Hold on. Let me check if you have labs."
+            ChooseMessage(sender_id, entity, value, "labs")
+            #send_message(sender_id, response)
 
         if response == None:
             response = "I have no idea what you are saying!"
@@ -102,6 +82,43 @@ def get_message(sender_id, entity, value):
         pass
 
 
+def ChooseMessage(sender_id, entity, value, classtypestring):
+    response = "Hold on. \n Let me check if you have %s." % classtypestring
+    DB_RESULT_TRUE = False
+    send_message(sender_id, response)
+    try:
+        print("Getting day of request... (%s)" % str(value[1].strftime('%A')))
+        if entity[0] == "class_check" or entity[0] == "lecture_check":
+            results = TimeTableDatabase.GetLecturesOnDay(value[1].strftime('%A'))
+        elif entity[0] == "lab_check" or entity[0] == "clinic_check":
+            results = TimeTableDatabase.GetSpecificClassType("Lab_Practical", value[1].strftime('%A'))
+
+        if len(results) != 0:
+            DB_RESULT_TRUE = True
+            parsedresults = TimeTableDatabase.parse_results(results)
+            #print("Parsed results:")
+            #print(parsedresults)
+    except:
+        print("Lecture fetching exception")
+        TimeTableDatabase.ExceptionInfo()
+        send_message(sender_id, "Error fetching lectures. \n Please try again later.")
+
+    if DB_RESULT_TRUE == True:
+        #response = ""
+        for i in range(0, len(results)):
+            response = ""
+            #print(type(parse_results[i]))
+            for y in range(0, len(parsedresults[i])):
+                if y == 2:
+                    response += parsedresults[i][y] + " to "
+                else:
+                    response += parsedresults[i][y] + "\n"
+            response.replace("[", "")
+            response.replace("]", "")
+            send_message(sender_id, response)#str(parsedresults[i]) + "\n\n")
+    else:
+        send_message(sender_id, "No classes on %s" % str(value[1].strftime('%A')))
+
 #uses PyMessenger to send response to user
 def send_message(recipient_id, response):
     #sends user the text message provided via input response parameter
@@ -110,3 +127,4 @@ def send_message(recipient_id, response):
 
 if __name__ == "__main__":
     app.run()
+    #timetablescraper.scrapetimer()
