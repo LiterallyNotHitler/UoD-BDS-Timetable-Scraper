@@ -1,4 +1,4 @@
-import random, witai, TimeTableDatabase, time, timetablescraper, threading, os
+import random, witai, TimeTableDatabase, time, TimeTableScraper, threading, os
 from flask import Flask, request
 from pymessenger.bot import Bot
 
