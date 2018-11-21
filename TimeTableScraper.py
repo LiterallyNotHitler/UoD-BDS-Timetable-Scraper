@@ -99,6 +99,9 @@ def scrapeupdatetodb():
     global TimeTable_Combine_Button
 
     listofvalues = []
+    
+    GOOGLE_CHROME_BIN = os.environ['GOOGLE_CHROME_BIN']
+    CHROMEDRIVER_PATH = os.environ['CHROMEDRIVER_PATH']
 
     try:
         #browser = webdriver.Chrome()
