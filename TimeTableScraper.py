@@ -1,4 +1,4 @@
-import requests, bs4, time, sqlite3, TimeTableDatabase, threading
+import requests, bs4, time, sqlite3, TimeTableDatabase, threading, pprint
 import sys, os, datetime
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
