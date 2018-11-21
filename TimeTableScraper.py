@@ -103,13 +103,18 @@ def scrapeupdatetodb():
     try:
         #browser = webdriver.Chrome()
         #TEST#
-        chrome_bin = os.environ['GOOGLE_CHROME_SHIM'] #gets chrome_bin from default shim that comes with buildpack
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument('--headless')
-        chrome_options.add_argument('--no-sandbox') # required when running as root user. otherwise you would get no sandbox errors.
-        browser = webdriver.Chrome(driver_path=chrome_bin, chrome_options=chrome_options,
-        service_args=['--verbose', '--log-path=/tmp/chromedriver.log']) #Heroku chromedriver modifications
+        #hrome_bin = os.environ['GOOGLE_CHROME_SHIM'] #gets chrome_bin from default shim that comes with buildpack
+        #chrome_options = webdriver.ChromeOptions()
+        #chrome_options.add_argument('--headless')
+        #chrome_options.add_argument('--no-sandbox') # required when running as root user. otherwise you would get no sandbox errors.
+        #browser = webdriver.Chrome(driver_path=chrome_bin, chrome_options=chrome_options,
+        #service_args=['--verbose', '--log-path=/tmp/chromedriver.log']) #Heroku chromedriver modifications
         #/TEST#
+        chrome_options = Options()
+        chrome_options.binary_location = GOOGLE_CHROME_BIN #GOOGLE_CHROME_BIN and CHROMEDRIVER_PATH are enviromental paths on Heroku
+        chrome_options.add_argument('--disable-gpu')
+        chrome_options.add_argument('--no-sandbox')
+        browser = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
 
         browser.get(TimeTable_Url)
 
