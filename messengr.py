@@ -1,4 +1,4 @@
-import random, witai, TimeTableDatabase, time, TimeTableScraper, threading, os
+import random, witai, TimeTableDatabase, time, TimeTableScraper, os
 from flask import Flask, request
 from pymessenger.bot import Bot
 
@@ -135,5 +135,4 @@ def send_message(recipient_id, response):
     return "success"
 
 if __name__ == "__main__":
-    #timetablescraper.scrapetimer()
     app.run()
