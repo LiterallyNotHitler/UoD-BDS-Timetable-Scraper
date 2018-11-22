@@ -54,6 +54,9 @@ def get_message(sender_id, entity, value):
     
     try:
         print(type(entity))
+        print(type(value))
+        print(entity)
+        print(value)
         if 'help_type' in entity:
             send_message(sender_id, "Type in\n do I have lectures on Monday,\n or do I have labs today.")
     except:
