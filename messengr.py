@@ -126,7 +126,7 @@ def ChooseMessage(sender_id, entity, value, classtypestring):
             response.replace("]", "")
             send_message(sender_id, response)#str(parsedresults[i]) + "\n\n")
     else:
-        send_message(sender_id, "No classes on %s" % str(value[(entity.index('u'datetime')].strftime('%A')))
+        send_message(sender_id, "No classes on %s" % str(value[(entity.index(r"u'datetime")].strftime('%A')))
 
 #uses PyMessenger to send response to user
 def send_message(recipient_id, response):
