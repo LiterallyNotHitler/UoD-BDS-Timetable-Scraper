@@ -55,7 +55,7 @@ def get_message(sender_id, entity, value):
     if len(entity) > 1: #Checks if there is a class/lecture intent and date time intent
         print("Passing...")
     else:
-        send_message(sender_id, "Please retype the message more clearly. \n Type help to see what I can do for you.")
+        send_message(sender_id, "Please retype the message more clearly." #\n Type help to see what I can do for you.")
         return None
 
     try:
