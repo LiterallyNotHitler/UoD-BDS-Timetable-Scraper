@@ -18,7 +18,6 @@ TimeTable_Combine_Button = '//*[@id="RadioType_2"]'
 def scrapetimer():
     threading.Timer(3600.0, scrapeupdatetodb).start()
     print("Scrape timer activating")
-    scrapeupdatetodb()
 
 
 
@@ -200,3 +199,4 @@ def scrapeupdatetodb():
         pass
 
 scrapetimer()
+scrapeupdatetodb()
