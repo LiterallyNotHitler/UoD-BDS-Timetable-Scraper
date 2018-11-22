@@ -1,5 +1,5 @@
 from wit import Wit#, Error
-import datetime
+import datetime, os
 
 access_token = os.environ['WIT_AI_TOKEN']
 
