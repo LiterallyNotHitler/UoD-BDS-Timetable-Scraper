@@ -53,12 +53,13 @@ def get_message(sender_id, entity, value):
     print("Deciphering intent...")
     
     try:
+        print
         if 'help_type' in entity:
             send_message(sender_id, "Type in\n do I have lectures on Monday,\n or do I have labs today.")
     except:
         print("Help handling failed...")
 
-    if len(entity) > 1: #Checks if there is a class/lecture intent and date time intent
+    if len(entity) > 1 or 'help_type' in entity: #Checks if there is a class/lecture intent and date time intent
         print("Passing...")
     else:
         send_message(sender_id, "Please retype the message more clearly.") #\n Type help to see what I can do for you.")
@@ -66,6 +67,7 @@ def get_message(sender_id, entity, value):
         return None
 
     try:
+        
         if 'class_type' in entity or 'lecture_check' in entity:
             # and if class_type is in the classes already in DB
             ChooseMessage(sender_id, entity, value, "lectures")
