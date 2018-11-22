@@ -194,4 +194,6 @@ def scrapeupdatetodb():
         ExceptionInfo()
         pass
 
+
 scrapetimer()
+scrapeupdatetodb()
