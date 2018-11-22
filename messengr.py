@@ -53,7 +53,7 @@ def get_message(sender_id, entity, value):
     print("Deciphering intent...")
     
     try:
-        print
+        print(type(entity))
         if 'help_type' in entity:
             send_message(sender_id, "Type in\n do I have lectures on Monday,\n or do I have labs today.")
     except:
