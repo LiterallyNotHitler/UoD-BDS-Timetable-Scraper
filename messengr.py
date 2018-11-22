@@ -50,6 +50,7 @@ def verify_fb_token(token_sent):
 def get_message(sender_id, entity, value):
     response = ""
     DB_RESULT_TRUE = False
+    print("Deciphering intent...")
 
     if len(entity) > 1: #Checks if there is a class/lecture intent and date time intent
         pass
@@ -86,6 +87,7 @@ def ChooseMessage(sender_id, entity, value, classtypestring):
     response = "Hold on. \n Let me check if you have %s." % classtypestring
     DB_RESULT_TRUE = False
     send_message(sender_id, response)
+    print("Getting correct user response...")
     try:
         print("Getting day of request... (%s)" % str(value[1].strftime('%A')))
         if entity[0] == "class_check" or entity[0] == "lecture_check":
