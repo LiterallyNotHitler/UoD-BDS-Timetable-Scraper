@@ -100,7 +100,7 @@ def ChooseMessage(sender_id, entity, value, classtypestring):
         if "class_check" in entity or "lecture_check" in entity:
             results = TimeTableDatabase.GetLecturesOnDay(value[1].strftime('%A'))
         elif "lab_check" in entity or "clinic_check" in entity:
-            results = TimeTableDatabase.GetSpecificClassType("Lab_Practical", value[(value.index("u'datetime")].strftime('%A'))
+            results = TimeTableDatabase.GetSpecificClassType("Lab_Practical", value[(value.index("u'datetime"))].strftime('%A'))
             print(type(entity))
 
         if len(results) != 0:
