@@ -198,4 +198,4 @@ def scrapeupdatetodb():
         ExceptionInfo()
         pass
 
-#scrapetimer()
+scrapetimer()
