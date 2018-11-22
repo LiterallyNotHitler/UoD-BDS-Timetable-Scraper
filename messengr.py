@@ -53,7 +53,7 @@ def get_message(sender_id, entity, value):
     print("Deciphering intent...")
     
     try:
-        if entity[0] == 'help_type':
+        if 'help_type' in entity:
             send_message(sender_id, "Type in\n do I have lectures on Monday,\n or do I have labs today.")
     except:
         print("Help handling failed...")
@@ -66,16 +66,16 @@ def get_message(sender_id, entity, value):
         return None
 
     try:
-        if entity[0] == 'class_type' or entity[0] == 'lecture_check':
+        if 'class_type' in entity or 'lecture_check' in entity:
             # and if class_type is in the classes already in DB
             ChooseMessage(sender_id, entity, value, "lectures")
 
-        elif entity[0] == 'clinic_check':
+        elif 'clinic_check' in entity:
             #response = "Hold on. Let me check if you have clinics."
             ChooseMessage(sender_id, entity, value, "clinics")
             send_message(sender_id, response)
 
-        elif entity[0] == 'lab_check':
+        elif 'lab_check' in entity:
             #response = "Hold on. Let me check if you have labs."
             ChooseMessage(sender_id, entity, value, "labs")
             #send_message(sender_id, response)
@@ -97,9 +97,9 @@ def ChooseMessage(sender_id, entity, value, classtypestring):
     print("Getting correct user response...")
     try:
         print("Getting day of request... (%s)" % str(value[1].strftime('%A')))
-        if entity[0] == "class_check" or entity[0] == "lecture_check":
+        if "class_check" in entity or "lecture_check" in entity:
             results = TimeTableDatabase.GetLecturesOnDay(value[1].strftime('%A'))
-        elif entity[0] == "lab_check" or entity[0] == "clinic_check":
+        elif "lab_check" in entity or "clinic_check" in entity:
             results = TimeTableDatabase.GetSpecificClassType("Lab_Practical", value[1].strftime('%A'))
 
         if len(results) != 0:
