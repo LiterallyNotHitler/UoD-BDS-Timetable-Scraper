@@ -100,7 +100,8 @@ def ChooseMessage(sender_id, entity, value, classtypestring):
         if "class_check" in entity or "lecture_check" in entity:
             results = TimeTableDatabase.GetLecturesOnDay(value[1].strftime('%A'))
         elif "lab_check" in entity or "clinic_check" in entity:
-            results = TimeTableDatabase.GetSpecificClassType("Lab_Practical", value[(entity.index("u'datetime")].strftime('%A'))
+            results = TimeTableDatabase.GetSpecificClassType("Lab_Practical", value[(value.index("u'datetime")].strftime('%A'))
+            print(type(entity))
 
         if len(results) != 0:
             DB_RESULT_TRUE = True
@@ -126,7 +127,7 @@ def ChooseMessage(sender_id, entity, value, classtypestring):
             response.replace("]", "")
             send_message(sender_id, response)#str(parsedresults[i]) + "\n\n")
     else:
-        send_message(sender_id, "No classes on %s" % str(value[(entity.index("u'datetime")].strftime('%A')))
+        send_message(sender_id, "No classes on %s" % str(value[1].strftime('%A')))
 
 #uses PyMessenger to send response to user
 def send_message(recipient_id, response):
