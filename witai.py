@@ -1,7 +1,7 @@
 from wit import Wit#, Error
 import datetime
 
-access_token = ''
+access_token = os.environ['WIT_AI_TOKEN']
 
 client = Wit(access_token = access_token)
 
