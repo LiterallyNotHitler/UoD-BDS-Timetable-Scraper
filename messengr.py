@@ -82,10 +82,6 @@ def get_message(sender_id, entity, value):
             ChooseMessage(sender_id, entity, value, "labs")
             #send_message(sender_id, response)
 
-        if response == None:
-            response = "I have no idea what you are saying!"
-            send_message(sender_id, response)
-
     except:
         print("Get message error")
         TimeTableDatabase.ExceptionInfo()
