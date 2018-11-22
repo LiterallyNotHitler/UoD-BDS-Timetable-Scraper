@@ -51,6 +51,12 @@ def get_message(sender_id, entity, value):
     response = ""
     DB_RESULT_TRUE = False
     print("Deciphering intent...")
+    
+    try:
+        if entity[0] == 'help_type':
+            send_message(sender_id, "Example uses, type in Do I have lectures on Monday, or Do I have labs today.")
+    except:
+        print("Help handling failed...")
 
     if len(entity) > 1: #Checks if there is a class/lecture intent and date time intent
         print("Passing...")
