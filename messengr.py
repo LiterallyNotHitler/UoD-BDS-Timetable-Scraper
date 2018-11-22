@@ -98,7 +98,7 @@ def ChooseMessage(sender_id, entity, value, classtypestring):
     print("Getting correct user response...")
     try:
         #print(value[entity.index(str("u'microbiology labs'"))])
-        print(value[entity.index(str("u'microbiology labs'"))])
+        print(value[entity.index('microbiology labs')])
         print("Getting day of request... (%s)" % str(value[(value.index("u'datetime"))].strftime('%A')))
         if 'class_check' in entity or 'lecture_check' in entity:
             results = TimeTableDatabase.GetLecturesOnDay(value[1].strftime('%A'))
