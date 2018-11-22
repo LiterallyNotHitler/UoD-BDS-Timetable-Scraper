@@ -198,5 +198,4 @@ def scrapeupdatetodb():
         ExceptionInfo()
         pass
 
-scrapeupdatetodb()
 scrapetimer()
