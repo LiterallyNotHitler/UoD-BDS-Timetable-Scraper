@@ -15,16 +15,9 @@ TimeTable_ViewTimeTable = "bGetTimetable"
 TimeTable_Combine_Button = '//*[@id="RadioType_2"]'
 
 
-
-scrapeupdatetodb() #Put here to stop double scraping
-
 def scrapetimer():
     threading.Timer(3600.0, scrapeupdatetodb).start()
     print("Scrape timer activating")
-
-
-
-
 
 def StripHTML(HTMLSTRIPLIST, Text):
     print(Text)
