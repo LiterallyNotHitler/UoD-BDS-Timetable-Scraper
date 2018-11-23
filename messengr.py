@@ -58,7 +58,7 @@ def get_message(sender_id, entity, value):
         print(entity)
         print(value)
         if 'help_type' in entity:
-            send_message(sender_id, "Example commands - n\ndo I have lectures on Monday,\nor do I have labs today.")
+            send_message(sender_id, 'Example commands - \n"Do I have lectures on Monday",\n"Do I have labs today."')
     except:
         print("Help handling failed...")
 
