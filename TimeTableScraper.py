@@ -14,6 +14,7 @@ TimeTable_Module_ClinicalIntroduction = "DS22007-SEM1-2-A"
 TimeTable_ViewTimeTable = "bGetTimetable"
 TimeTable_Combine_Button = '//*[@id="RadioType_2"]'
 
+TimeTableAlreadyBeingScraped = False
 
 def scrapetimer():
     threading.Timer(3600.0, scrapeupdatetodb).start()
@@ -93,7 +94,15 @@ def scrapeupdatetodb():
     global TimeTable_Module_ClinicalIntroduction
     global TimeTable_ViewTimeTable
     global TimeTable_Combine_Button
+    
+    global TimeTableAlreadyBeingScraped
 
+    if TimeTableAlreadyBeingScraped == True:
+        print("Timetable aready being scraped... Thread has to queue.")
+        return None
+    else:
+        TimeTableAlreadyBeingScraped = True
+    
     listofvalues = []
     
     GOOGLE_CHROME_BIN = os.environ['GOOGLE_CHROME_BIN']
@@ -189,9 +198,11 @@ def scrapeupdatetodb():
         browser.quit()
 
         CommitToDb(listofvalues, classes)
+        TimeTableAlreadyBeingScraped = False
     except:
         print("Update DB error")
         ExceptionInfo()
+        TimeTableAlreadyBeingScraped = False
         pass
 
 
