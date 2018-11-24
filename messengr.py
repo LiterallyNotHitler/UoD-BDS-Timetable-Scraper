@@ -7,6 +7,8 @@ ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 bot = Bot(ACCESS_TOKEN)
 
+CurrentlyProcessingMessage = False #Prevents bot sending multiple replies at once as a result of multiple user input. Only first response is processed.
+
 #We will receive messages that Facebook sends our bot at this endpoint
 @app.route("/", methods=['GET', 'POST'])
 def receive_message():
@@ -30,11 +32,21 @@ def receive_message():
                 if message['message'].get('text'):
 
                     messaging_text = message['message']['text']
-
-                    entity, value = witai.wit_response(messaging_text)
-                    print("wit ai:")
-                    print(entity, value)
-                    get_message(sender_id, entity, value)
+                    
+                    if CurrentlyProcessingMessage == True:
+                        print("Message response denied. First response is still being processed.")
+                        return None
+                    
+                    CurrentlyProcessingMessage == True
+                    try:
+                        entity, value = witai.wit_response(messaging_text)
+                        print("wit ai:")
+                        print(entity, value)
+                        get_message(sender_id, entity, value)
+                        CurrentlyProcessingMessage == False
+                    except:
+                        print("Message error at initial GET")
+                        CurrentlyProcessingMessage == False
 
     return "Message Processed"
 
