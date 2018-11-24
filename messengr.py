@@ -65,10 +65,6 @@ def get_message(sender_id, entity, value):
     print("Deciphering intent...")
     
     try:
-        print(type(entity))
-        print(type(value))
-        print(entity)
-        print(value)
         if 'help_type' in entity:
             send_message(sender_id, 'Example commands - \n"Do I have lectures on Monday",\n"Do I have labs today."')
     except:
@@ -84,18 +80,14 @@ def get_message(sender_id, entity, value):
     try:
         
         if 'class_type' in entity or 'lecture_check' in entity:
-            # and if class_type is in the classes already in DB
             ChooseMessage(sender_id, entity, value, "lectures")
 
         elif 'clinic_check' in entity:
-            #response = "Hold on. Let me check if you have clinics."
             ChooseMessage(sender_id, entity, value, "clinics")
             send_message(sender_id, response)
 
         elif 'lab_check' in entity:
-            #response = "Hold on. Let me check if you have labs."
             ChooseMessage(sender_id, entity, value, "labs")
-            #send_message(sender_id, response)
 
     except:
         print("Get message error")
@@ -109,8 +101,6 @@ def ChooseMessage(sender_id, entity, value, classtypestring):
     send_message(sender_id, response)
     print("Getting correct user response...")
     try:
-        #print(value[entity.index(str("u'microbiology labs'"))])
-        #print(value[entity.index('lab_check')])
         print("Getting day of request... (%s)" % str(value[(entity.index('datetime'))].strftime('%A')))
         if 'class_check' in entity or 'lecture_check' in entity:
             results = TimeTableDatabase.GetLecturesOnDay(value[(entity.index('datetime'))].strftime('%A'))
@@ -121,8 +111,6 @@ def ChooseMessage(sender_id, entity, value, classtypestring):
         if len(results) != 0:
             DB_RESULT_TRUE = True
             parsedresults = TimeTableDatabase.parse_results(results)
-            #print("Parsed results:")
-            #print(parsedresults)
     except:
         print("Lecture fetching exception")
         TimeTableDatabase.ExceptionInfo()
