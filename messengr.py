@@ -37,16 +37,16 @@ def receive_message():
                         print("Message response denied. First response is still being processed.")
                         return None
                     
-                    CurrentlyProcessingMessage == True
+                    CurrentlyProcessingMessage = True
                     try:
                         entity, value = witai.wit_response(messaging_text)
                         print("wit ai:")
                         print(entity, value)
                         get_message(sender_id, entity, value)
-                        CurrentlyProcessingMessage == False
+                        CurrentlyProcessingMessage = False
                     except:
                         print("Message error at initial GET")
-                        CurrentlyProcessingMessage == False
+                        CurrentlyProcessingMessage = False
 
     return "Message Processed"
 
