@@ -43,6 +43,7 @@ def receive_message():
                         print("wit ai:")
                         print(entity, value)
                         get_message(sender_id, entity, value)
+                        print("CurrentlyProcessingMessage set to FALSE")
                         CurrentlyProcessingMessage = False
                     except:
                         print("Message error at initial GET")
