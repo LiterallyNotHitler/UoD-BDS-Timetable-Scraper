@@ -1,4 +1,4 @@
-import random, witai, TimeTableDatabase, time, TimeTableScraper, os
+import random, witai, TimeTableDatabase, time, TimeTableScraper, os, datetime
 from flask import Flask, request
 from pymessenger.bot import Bot
 
@@ -80,6 +80,17 @@ def get_message(sender_id, entity, value):
         print("Less than 2 intents in statements, returning NONE.")
         return None
 
+    try:
+        if entity.index('datetime'))].strftime('%V') != datetime.date.today().strftime("%V"):
+            print("Request is current date...") #Checks if request is checking for current week
+        else:
+            send_message(sender_id, "Only this week's lectures can be shown.")
+            return None
+    except:
+        print("Week check error...")
+        TimeTableDatabase.ExceptionInfo()
+        pass
+    
     try:
         
         if 'class_type' in entity or 'lecture_check' in entity:
