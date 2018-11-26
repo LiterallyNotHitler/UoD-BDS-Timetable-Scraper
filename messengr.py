@@ -81,6 +81,7 @@ def get_message(sender_id, entity, value):
         return None
 
     try:
+        print(value[(entity.index('datetime'))].strftime('%V'))
         print(entity[entity.index('datetime')].strftime('%V'))
         print(datetime.date.today().strftime('%V'))
         if entity[entity.index('datetime')].strftime('%V') != datetime.date.today().strftime('%V'):
