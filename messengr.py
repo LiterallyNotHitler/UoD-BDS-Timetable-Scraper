@@ -81,7 +81,9 @@ def get_message(sender_id, entity, value):
         return None
 
     try:
-        if entity[entity.index('datetime')].strftime('%V') != datetime.date.today().strftime("%V"):
+        print(entity[entity.index('datetime')].strftime('%V'))
+        print(datetime.date.today().strftime('%V'))
+        if entity[entity.index('datetime')].strftime('%V') != datetime.date.today().strftime('%V'):
             print("Request is current date...") #Checks if request is checking for current week
         else:
             send_message(sender_id, "Only this week's lectures can be shown.")
