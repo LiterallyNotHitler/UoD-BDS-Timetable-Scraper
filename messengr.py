@@ -21,13 +21,17 @@ def receive_message():
         return verify_fb_token(token_sent)
     #if the request was not get, it must be POST and we can just proceed with sending a message back to user
     else:
-        # get whatever message a user sent the bot
+       if CurrentlyProcessingMessage:
+            print("Message response denied. First response is still being processed.")
+            return None
+       # get whatever message a user sent the bot
        output = request.get_json()
        for event in output['entry']:
           messaging = event['messaging']
           for message in messaging:
 
             if message.get('message'):
+                CurrentlyProcessingMessage = True
                 #Facebook Messenger ID for user so we know where to send response back to
                 sender_id = message['sender']['id']
                 recipient_id = message['sender']['id']
@@ -35,11 +39,6 @@ def receive_message():
 
                     messaging_text = message['message']['text']
                     
-                    if CurrentlyProcessingMessage == True:
-                        print("Message response denied. First response is still being processed.")
-                        return None
-                    
-                    CurrentlyProcessingMessage = True
                     try:
                         entity, value = witai.wit_response(messaging_text)
                         print("wit ai:")
