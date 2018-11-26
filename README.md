@@ -15,3 +15,6 @@ TODO:
   * Add user customisation properties, i.e. only show labs for group A.
   * Add ability for user to select what school and modules to scrape.
   * Swap hosts from Heroku to Vultr to get around Webdyno dying every 30m of inactivity.
+    * This causes some pretty wacky bugs. Heroku parses one FB POST as multiple.
+  * Add ability to check next weeks lectures.
+
