@@ -18,7 +18,6 @@ TimeTableAlreadyBeingScraped = False #Prevents both threads writing to DB, doubl
 
 def scrapetimer():
     threading.Timer(3600.0, scrapeupdatetodb).start()
-    print("Scrape timer activating")
 
 def StripHTML(HTMLSTRIPLIST, Text):
     print(Text)
@@ -107,7 +106,13 @@ def scrapeupdatetodb():
     
     GOOGLE_CHROME_BIN = os.environ['GOOGLE_CHROME_BIN']
     CHROMEDRIVER_PATH = os.environ['CHROMEDRIVER_PATH']
-
+    
+    try:
+        if threading.current_thread().name != 'MainThread':
+            print("Scrape timer activating @ scrapeupdatetodb")
+    except:
+        print("Thread checking error")
+      
     try:
         #browser = webdriver.Chrome()
         #TEST#
