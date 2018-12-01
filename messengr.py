@@ -17,6 +17,8 @@ def receive_message():
     if CurrentlyProcessingMessage:
         print("Message response denied. First response is still being processed.")
         return None
+    else:
+        print("Message proceeds. No messages in queue.")
     
     if request.method == 'GET':
         """Before allowing people to message your bot, Facebook has implemented a verify token
