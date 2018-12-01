@@ -14,15 +14,12 @@ TimeTable_Module_ClinicalIntroduction = "DS22007-SEM1-2-A"
 TimeTable_ViewTimeTable = "bGetTimetable"
 TimeTable_Combine_Button = '//*[@id="RadioType_2"]'
 
-NumberOfTimesScraped = 0 #This is done to prevent heroku dyno startup spam
-
 TimeTableAlreadyBeingScraped = False #Prevents both threads writing to DB, doubling the values inside (by length; not absolute value) - this is caused by Heroky dyno reactivation after 30m
 
 def scrapetimer():
     threading.Timer(3600.0, scrapeupdatetodb).start()
 
 def StripHTML(HTMLSTRIPLIST, Text):
-    global NumberOfTimesScraped
     
     print(Text)
     print(HTMLSTRIPLIST)
@@ -33,8 +30,6 @@ def StripHTML(HTMLSTRIPLIST, Text):
             print("HTML FOUND")
             for term in HTMLSTRIPLIST:
                 Text = Text.replace(HTML, "")
-
-    NumberOfTimesScraped += 1
     return Text
 
 def ExceptionInfo():
