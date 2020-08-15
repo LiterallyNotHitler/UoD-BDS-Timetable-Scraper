@@ -8,7 +8,7 @@ How:
   * Uses headless chrome and selenium to navigate the timetable
   * Uses BS4 to browse the data and organise it
   * Uses Pymessenger to recieve and serve messages across FB Messenger
-    * Uses Flask to provide pathways for these GET and POST requests
+    * Uses Flask to provide pathways for GET and POST requests
     * Uses Wit.ai for NLP to decipher the intent of the message and get corresponding data, i.e. date, to respond.
 
 TODO:
