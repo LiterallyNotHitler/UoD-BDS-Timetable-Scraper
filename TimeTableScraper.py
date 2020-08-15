@@ -93,7 +93,6 @@ def scrapeupdatetodb():
     global TimeTable_Module_ClinicalIntroduction
     global TimeTable_ViewTimeTable
     global TimeTable_Combine_Button
-    
     global TimeTableAlreadyBeingScraped
 
     if TimeTableAlreadyBeingScraped == True:
@@ -114,15 +113,6 @@ def scrapeupdatetodb():
         print("Thread checking error")
       
     try:
-        #browser = webdriver.Chrome()
-        #TEST#
-        #hrome_bin = os.environ['GOOGLE_CHROME_SHIM'] #gets chrome_bin from default shim that comes with buildpack
-        #chrome_options = webdriver.ChromeOptions()
-        #chrome_options.add_argument('--headless')
-        #chrome_options.add_argument('--no-sandbox') # required when running as root user. otherwise you would get no sandbox errors.
-        #browser = webdriver.Chrome(driver_path=chrome_bin, chrome_options=chrome_options,
-        #service_args=['--verbose', '--log-path=/tmp/chromedriver.log']) #Heroku chromedriver modifications
-        #/TEST#
         chrome_options = webdriver.ChromeOptions()
         chrome_options.binary_location = GOOGLE_CHROME_BIN #GOOGLE_CHROME_BIN and CHROMEDRIVER_PATH are enviromental paths on Heroku
         chrome_options.add_argument('--disable-gpu')
